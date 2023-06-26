@@ -9,7 +9,7 @@ Anything with the word `temp` is meant to be changed in accordance with your pro
 
 ## Middleware folder
 
-* `errorHandler`
+- `errorHandler`
 
 ```javascript
 module.exports = (err, req, res, next) => {
@@ -22,7 +22,7 @@ module.exports = (err, req, res, next) => {
 };
 ```
 
-* `notFoundHandler`
+- `notFoundHandler`
 
 ```javascript
 module.exports = (req, res, next) => {
@@ -30,10 +30,9 @@ module.exports = (req, res, next) => {
   err.status = 404;
   next(err);
 };
-
 ```
 
-* `passport.js`
+- `passport.js`
 
 ```javascript
 const LocalStrategy = require("passport-local");
@@ -44,7 +43,7 @@ exports.localStrategy = new LocalStrategy(
   { usernameField: "name" },
   async (name, password, done) => {
     try {
-      const temp = await Temp.findOne({ name: name});
+      const temp = await Temp.findOne({ name: name });
       if (!temp) {
         return done(null, false);
       }
@@ -58,9 +57,10 @@ exports.localStrategy = new LocalStrategy(
     }
   }
 );
-
 ```
+
 ## database.js
+
 ```javascript
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -74,6 +74,7 @@ module.exports = connectDB;
 ```
 
 ## Models folder
+
 `Temp.js`: Change the name of the file and its content in accordance with your project
 
 ```javascript
@@ -89,8 +90,9 @@ module.exports = model("Temp", TempSchema);
 ```
 
 ## api/temp folders
-* `temp.controllers.js`
-  
+
+- `temp.controllers.js`
+
 ```javascript
 const Temp = require("../../models/Temp");
 const bcrypt = require("bcrypt");
@@ -172,12 +174,12 @@ exports.deleteTemp = async (req, res, next) => {
     return next(error);
   }
 };
-
 ```
-  
-* `temp.routes.js`
+
+- `temp.routes.js`
+
 ```javascript
-  const express = require("express");
+const express = require("express");
 const {
   getTemp,
   updateTemp,
@@ -216,7 +218,8 @@ router.post(
 module.exports = router;
 ```
 
-## app.js 
+## app.js
+
 ```javascript
 const express = require("express");
 const connectDb = require("./database");
@@ -248,18 +251,21 @@ app.listen(process.env.PORT, () => {
   console.log(`The application is running on ${process.env.PORT}`);
 });
 ```
+
 ## package.json stuff
+
 ### Installed packages
-* `express`
-* `mongoose`
-* `dotenv`
-* `morgan`
-* `cors`
-* `bcrypt`
-* `jsonwebtoken`
-* `passport`
-* `passport-local`
- 
+
+- `express`
+- `mongoose`
+- `dotenv`
+- `morgan`
+- `cors`
+- `bcrypt`
+- `jsonwebtoken`
+- `passport`
+- `passport-local`
+
 ```json
 {
   "name": "express-template-fs23",
@@ -289,19 +295,21 @@ app.listen(process.env.PORT, () => {
     "nodemon": "^2.0.22"
   }
 }
-
 ```
 
-## .env 
+## .env
+
 ```javascript
-PORT = 8000
-JWT_SECRET = "secret"
-JWT_TOKEN_EXP = "1h"
-MONGO_DB_URL = "YOUR MONGODB URL"
+PORT = 8000;
+JWT_SECRET = "secret";
+JWT_TOKEN_EXP = "1h";
+MONGO_DB_URL = "YOUR MONGODB URL";
 ```
 
-## .gitignore 
+## .gitignore
+
 ```javascript
-node_modules
+node_modules;
 ```
-* NOTE: don't forget to include your `.env` file in `.gitignore`
+
+- NOTE: don't forget to include your `.env` file in `.gitignore`
