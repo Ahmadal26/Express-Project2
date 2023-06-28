@@ -22,13 +22,17 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
+//signup - register
 exports.createUser = async (req, res, next) => {
   try {
     const { password } = req.body;
     req.body.password = await passHash(password);
+    // create user
     const newUser = await User.create(req.body);
+    // generate Token
     const token = generateToken(newUser);
-    res.status(201).json({ token });
+    // return Token
+    res.status(201).json({ message: "You are Registered now!" }, { token });
   } catch (err) {
     return res.status(500).json(err.message);
   }

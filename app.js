@@ -30,3 +30,5 @@ app.listen(config.PORT, () => {
 });
 
 module.exports = app;
+
+//https://stackoverflow.com/questions/46448637/expressjs-jwt-and-passport-implementation
