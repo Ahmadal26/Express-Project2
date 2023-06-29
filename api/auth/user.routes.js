@@ -22,7 +22,10 @@ router.param("userId", async (req, res, next, userId) => {
 });
 
 router.get("/", passport.authenticate("jwt", { session: false }), getUser);
+//register - signup
 router.post("/createUser", createUser);
+
+//signin
 router.post(
   "/signin",
   passport.authenticate("local", { session: false }),
