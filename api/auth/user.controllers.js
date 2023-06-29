@@ -23,6 +23,7 @@ exports.getUser = async (req, res, next) => {
 };
 
 //signup - register
+//https://jwt.io/#debugger-io - decode the result token and see payload
 exports.createUser = async (req, res, next) => {
   try {
     const { password } = req.body;
@@ -32,7 +33,7 @@ exports.createUser = async (req, res, next) => {
     // generate Token
     const token = generateToken(newUser);
     // return Token
-    res.status(201).json({ message: "You are Registered now!" }, token);
+    res.status(201).json({ message: "You are Registered now!", token });
   } catch (error) {
     return res.status(500).json(error.message);
   }

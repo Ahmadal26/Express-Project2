@@ -19,7 +19,7 @@ app.use(passport.initialize());
 passport.use("local", localStrategy);
 passport.use(jwtStrategy);
 
-// Everything with the word temp is a placeholder that you'll change in accordance with your project
+// when calling user.routes.js functions, please place /user in ur postman path
 app.use("/user", userRoutes);
 
 app.use(notFound);
