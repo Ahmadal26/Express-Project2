@@ -32,9 +32,9 @@ exports.createUser = async (req, res, next) => {
     // generate Token
     const token = generateToken(newUser);
     // return Token
-    res.status(201).json({ message: "You are Registered now!" }, { token });
-  } catch (err) {
-    return res.status(500).json(err.message);
+    res.status(201).json({ message: "You are Registered now!" }, token);
+  } catch (error) {
+    return res.status(500).json(error.message);
   }
 };
 
@@ -42,8 +42,8 @@ exports.signin = async (req, res) => {
   try {
     const token = generateToken(req.user);
     return res.status(200).json({ token });
-  } catch (err) {
-    return res.status(500).json(err.message);
+  } catch (error) {
+    return res.status(500).json(error.message);
   }
 };
 
