@@ -9,6 +9,8 @@ const userRoutes = require("./api/auth/user.routes");
 const config = require("./config/keys");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
+const { create } = require("./models/User");
+const { createUser } = require("./api/auth/user.controllers");
 
 app.use(cors());
 connectDb();
@@ -24,6 +26,7 @@ app.use("/user", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
+// app.use("api/auth/", createUser);
 
 app.listen(config.PORT, () => {
   console.log(`The application is running on ${config.PORT}`);
