@@ -2,13 +2,13 @@ const { model, Schema } = require("mongoose");
 
 const MovieSchema = new Schema(
   {
-    title: { type: String, require: true },
-    genre: { type: String, require: true },
-    releaseDate: { type: Date, require: true },
-    posterImage: { type: String, require: true },
-    reviews: [ReviewSchema],
-    numReviews: { type: Number, require: true, default: 0 },
-    rating: { type: Number, require: true, default: 0 },
+    title: { type: String, required: true },
+    genre: { type: String, required: true },
+    releaseDate: { type: Date, required: true },
+    posterImage: { type: String, required: true },
+    // reviews: [ReviewSchema],
+    numReviews: { type: Number, required: true, default: 0 },
+    rating: { type: Number, required: true, default: 0 },
   },
 
   { timestamps: true }

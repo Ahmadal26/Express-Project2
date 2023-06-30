@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
 
 const ActorSchema = new Schema({
-  name: { type: String, require: true },
+  name: { type: String, required: true },
   movie: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -9,4 +9,4 @@ const ActorSchema = new Schema({
   },
 });
 
-module.exports = model("Movie", MovieSchema);
+module.exports = model("Movie", ActorSchema);

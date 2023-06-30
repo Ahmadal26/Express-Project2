@@ -8,6 +8,7 @@ const app = express();
 const notFound = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
 const userRoutes = require("./api/auth/user.routes");
+const movieRoutes = require("./api/movie/movie.routes");
 const config = require("./config/keys");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
@@ -25,6 +26,7 @@ passport.use(jwtStrategy);
 
 // when calling user.routes.js functions, please place /user in ur postman path
 app.use("/user", userRoutes);
+app.use("/movie", movieRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use(notFound);
