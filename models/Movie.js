@@ -1,11 +1,17 @@
 const { model, Schema } = require("mongoose");
-// Everything with the word temp is a placeholder that you'll change in accordance with your project
 
-const MovieSchema = new Schema({
-  username: { type: String, unique: true, required: true },
-  password: { type: String, required: true },
+const MovieSchema = new Schema(
+  {
+    title: { type: String, require: true },
+    genre: { type: String, require: true },
+    releaseDate: { type: Date, require: true },
+    posterImage: { type: String, require: true },
+    reviews: [ReviewSchema],
+    numReviews: { type: Number, require: true, default: 0 },
+    rating: { type: Number, require: true, default: 0 },
+  },
 
-  // create relations in here and in the other model
-});
+  { timestamps: true }
+);
 
-module.exports = model("Movie", Temp2Schema);
+module.exports = model("Movie", MovieSchema);

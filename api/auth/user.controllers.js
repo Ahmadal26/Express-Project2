@@ -26,6 +26,10 @@ exports.getUser = async (req, res, next) => {
 //https://jwt.io/#debugger-io - decode the result token and see payload
 exports.createUser = async (req, res, next) => {
   try {
+    //fetching the image from user
+    if (req.file) {
+      req.body.profileImage = `${req.file.path}`;
+    }
     const { password } = req.body;
     req.body.password = await passHash(password);
     // create user
