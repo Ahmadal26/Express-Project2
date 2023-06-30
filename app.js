@@ -2,6 +2,8 @@ const express = require("express");
 const connectDb = require("./database");
 const cors = require("cors");
 const morgan = require("morgan");
+const multer = require("multer");
+const path = require("path"); //Image File
 const app = express();
 const notFound = require("./middlewares/notFoundHandler");
 const errorHandler = require("./middlewares/errorHandler");
@@ -23,6 +25,7 @@ passport.use(jwtStrategy);
 
 // when calling user.routes.js functions, please place /user in ur postman path
 app.use("/user", userRoutes);
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use(notFound);
 app.use(errorHandler);
@@ -35,3 +38,4 @@ app.listen(config.PORT, () => {
 module.exports = app;
 
 //https://stackoverflow.com/questions/46448637/expressjs-jwt-and-passport-implementation
+//https://expressjs.com/en/starter/generator.html

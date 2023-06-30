@@ -6,6 +6,7 @@ module.exports = (user) => {
     username: user.username,
     _id: user._id,
     email: user.email,
+    profileImage: user.profileImage,
   };
   // npm i jsonwebtoken - to generate a token
   const token = jwt.sign(payload, config.JWT_SECRET, {
