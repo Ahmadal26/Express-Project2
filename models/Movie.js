@@ -8,4 +8,4 @@ const MovieSchema = new Schema({
   // create relations in here and in the other model
 });
 
-module.exports = model("Movie", Temp2Schema);
+module.exports = model("Movie", MovieSchema);
