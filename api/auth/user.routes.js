@@ -36,7 +36,4 @@ router.post(
 // router.put("/:userId", updateUser);
 router.delete("/:userId", deleteUser);
 
-//logou
-router.get("/signout", signout);
-
 module.exports = router;
