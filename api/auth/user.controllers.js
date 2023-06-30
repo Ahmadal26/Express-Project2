@@ -24,7 +24,7 @@ exports.getUser = async (req, res, next) => {
 
 //signup - register
 //https://jwt.io/#debugger-io - decode the result token and see payload
-exports.createUser = async (req, res, next) => {
+exports.signup = async (req, res, next) => {
   try {
     const { password } = req.body;
     req.body.password = await passHash(password);
