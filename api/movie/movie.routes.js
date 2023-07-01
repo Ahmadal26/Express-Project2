@@ -25,7 +25,13 @@ routers.param("movieId", async (req, res, next, movieId) => {
 });
 
 routers.get("/", passport.authenticate("jwt", { session: false }), getAllMovie);
-routers.post("/movieCreate", uploader.single("posterImage"), movieCreate);
-routers.get("/movieById/:Id", getByMovieId);
-routers.delete("/deleteMovieById//:Id", movieDelete);
+routers.post(
+  "/",
+  uploader.single("posterImage"),
+  passport.authenticate("jwt", { session: false }),
+  movieCreate
+);
+routers.get("/:movieId", getByMovieId);
+routers.delete("/:movieId", movieDelete);
+routers.put("/:movieId", movieUpdateById);
 module.exports = routers;
