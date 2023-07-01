@@ -9,6 +9,7 @@ const {
   movieUpdateById,
   movieDelete,
 } = require("./movie.controllers");
+
 const passport = require("passport");
 routers.param("movieId", async (req, res, next, movieId) => {
   try {
@@ -25,5 +26,6 @@ routers.param("movieId", async (req, res, next, movieId) => {
 
 routers.get("/", passport.authenticate("jwt", { session: false }), getAllMovie);
 routers.post("/movieCreate", uploader.single("posterImage"), movieCreate);
-routers.get("/movieById", getByMovieId);
+routers.get("/movieById/:Id", getByMovieId);
+routers.delete("/deleteMovieById//:Id", movieDelete);
 module.exports = routers;

@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getUser,
   signup,
-  update,
+  userUpdateById,
   deleteUser,
   fetchUser,
   signin,
@@ -33,7 +33,7 @@ router.post(
   passport.authenticate("local", { session: false }),
   signin
 );
-// router.put("/:userId", updateUser);
+// router.put("/:userId", userUpdateById);
 router.delete("/:userId", deleteUser);
 
 module.exports = router;

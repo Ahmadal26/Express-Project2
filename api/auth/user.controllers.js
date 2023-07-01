@@ -51,15 +51,24 @@ exports.signin = async (req, res) => {
     return res.status(500).json(error.message);
   }
 };
+//7- a user can update a movie by id
+exports.userUpdateById = async (req, res, next) => {
+  try {
+    if (!req.user.isStaff) {
+      res.status(401).json({
+        message: "You are not Admin and not authorized to update a user!",
+        error,
+      });
+    }
+    const foundUser = await Movie.findByIdAndUpdate(req.body._id);
 
-// exports.updateUser = async (req, res, next) => {
-//   try {
-//     await User.findByIdAndUpdate(req.user.id, req.body);
-//     return res.status(204).end();
-//   } catch (error) {
-//     return next(error);
-//   }
-// };
+    if (!foundUser) {
+      return res.status(404).json({ message: " User not Found" });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
 exports.deleteUser = async (req, res, next) => {
   try {

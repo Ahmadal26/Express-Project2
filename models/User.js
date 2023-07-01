@@ -8,9 +8,7 @@ const UserSchema = new Schema(
     email: { type: String, unique: true, required: true },
     profileImage: { type: String, required: true },
     isStaff: { type: Boolean, default: false },
-    movies: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
-    // create relations in here and in the other model
   },
   { timestamps: true }
 );
