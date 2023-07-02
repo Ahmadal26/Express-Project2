@@ -1,19 +1,30 @@
 const Movie = require("../../models/Movie");
 
-//6- a user can receive a list of movies
+// getAllMovie - a user can see a list of all movies -- working fine
+// exports.getAllMovie = async (req, res, next) => {
+//   try {
+//     if (req.user.isStaff) {
+//       const movies = await Movie.find();
+//       res.status(200).json(movies);
+//     } else {
+//       res.status(401).json({ message: "you dont have staff permission" });
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+// since a user -  no need to be staff
 exports.getAllMovie = async (req, res, next) => {
   try {
-    if (req.user.isStaff) {
-      const movies = await Movie.find();
-      res.status(200).json(movies);
-    } else {
-      res.status(401).json({ message: "you dont have staff permission" });
-    }
+    const movies = await Movie.find();
+    res.status(200).json(movies);
   } catch (error) {
-    next(error);
+    res.status(401).json({ message: " No Movies Found " });
   }
 };
 
+//a user can view movie details (name,actors,genre,releae date, rating, reviews) -- working fine
 exports.getByMovieId = async (req, res, next) => {
   const { movieId } = req.params;
   try {
@@ -28,7 +39,7 @@ exports.getByMovieId = async (req, res, next) => {
   }
 };
 
-//5- a user can create a movie -- working fine
+//5- movieCreate - a staff member, I can add new movies (name, actor, genre, release date) -- working fine
 exports.movieCreate = async (req, res, next) => {
   try {
     if (!req.user.isStaff) {

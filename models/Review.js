@@ -19,10 +19,3 @@ const ReviewSchema = new Schema(
   }
 );
 module.exports = model("Review", ReviewSchema);
-
-
-
-  rating: { type: Number },
-  text: { type: String, required: true },
-  movieId: { type: Schema.Types.ObjectId, ref: "Movie" },
-  userId: { type: Schema.Types.ObjectId, ref: "User" },

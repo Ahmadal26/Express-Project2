@@ -2,8 +2,6 @@ const User = require("../../models/User");
 const passHash = require("../../utils/auth/passhash");
 const generateToken = require("../../utils/auth/generateToken");
 
-// Everything with the word temp is a placeholder that you'll change in accordance with your project
-
 exports.fetchUser = async (tempId, next) => {
   try {
     const temp1 = await User.findById(tempId);
@@ -22,7 +20,7 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
-//signup - register
+//1 - signup - register (username, password , email, profileImage)
 //https://jwt.io/#debugger-io - decode the result token and see payload
 exports.signup = async (req, res, next) => {
   try {
@@ -43,6 +41,7 @@ exports.signup = async (req, res, next) => {
   }
 };
 
+//2 - sign in - (userId, username, email, token expiration)
 exports.signin = async (req, res) => {
   try {
     const token = generateToken(req.user);
@@ -55,7 +54,7 @@ exports.signin = async (req, res) => {
 exports.userUpdateById = async (req, res, next) => {
   try {
     if (!req.user.isStaff) {
-      res.status(401).json({
+      return res.status(401).json({
         message: "You are not Admin and not authorized to update a user!",
         error,
       });
@@ -66,7 +65,7 @@ exports.userUpdateById = async (req, res, next) => {
       return res.status(404).json({ message: " User not Found" });
     }
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    return res.status(404).json({ message: error.message });
   }
 };
 
