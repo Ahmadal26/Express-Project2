@@ -10,6 +10,8 @@ const errorHandler = require("./middlewares/errorHandler");
 const userRoutes = require("./api/auth/user.routes");
 const movieRoutes = require("./api/movie/movie.routes");
 const genreRoute = require("./api/genre/genre.routes");
+const actorsRoutes = require("./api/actor/actor.routes");
+const reviewsRoutes = require("./api/review/review.routes");
 const config = require("./config/keys");
 const passport = require("passport");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
@@ -29,6 +31,9 @@ passport.use(jwtStrategy);
 app.use("/user", userRoutes);
 app.use("/movie", movieRoutes);
 app.use("/genre", genreRoute);
+app.use("/actors", actorsRoutes);
+app.use("/review", reviewsRoutes);
+
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use(notFound);

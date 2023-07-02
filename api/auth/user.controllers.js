@@ -20,7 +20,7 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
-//1 - signup - register (username, password , email, profileImage)
+//signup - register
 //https://jwt.io/#debugger-io - decode the result token and see payload
 exports.signup = async (req, res, next) => {
   try {
@@ -41,7 +41,6 @@ exports.signup = async (req, res, next) => {
   }
 };
 
-//2 - sign in - (userId, username, email, token expiration)
 exports.signin = async (req, res) => {
   try {
     const token = generateToken(req.user);
@@ -50,7 +49,8 @@ exports.signin = async (req, res) => {
     return res.status(500).json(error.message);
   }
 };
-//7- a user can update a movie by id
+
+// //7- a user can update a movie by id
 exports.userUpdateById = async (req, res, next) => {
   try {
     if (!req.user.isStaff) {
@@ -69,6 +69,14 @@ exports.userUpdateById = async (req, res, next) => {
   }
 };
 
+exports.deleteUser = async (req, res, next) => {
+  try {
+    await User.findByIdAndRemove({ _id: req.user.id });
+    return res.status(204).end();
+  } catch (error) {
+    return next(error);
+  }
+};
 exports.deleteUser = async (req, res, next) => {
   try {
     await User.findByIdAndRemove({ _id: req.user.id });

@@ -1,6 +1,14 @@
 const Genre = require("../../models/Genre");
 const Movie = require("../../models/Movie");
 
+exports.fetchGenre = async (tempId, next) => {
+  try {
+    const temp1 = await User.findById(tempId);
+    return temp1;
+  } catch (error) {
+    return next(error);
+  }
+};
 // create new Genre
 exports.createNewGenre = async (req, res, next) => {
   try {
@@ -44,8 +52,9 @@ exports.getGenreById = async (req, res, next) => {
 };
 
 // addActorToMovie -
-exports.addMovieToGenre = async (req, res, next) => {
+exports.addGenreToMovie = async (req, res, next) => {
   try {
+    console.log("sheeesh");
     if (!req.user.isStaff) {
       return res.status(401).json({
         message:
@@ -71,11 +80,11 @@ exports.addMovieToGenre = async (req, res, next) => {
 
     // step 3: if both movie and actor found
     if (foundGenre && foundMovie) {
-      await Movie.findOneAndUpdate(req.movie._id, {
-        $push: { genres: Genre._id }, //genres as ref in Movie Model
+      await Movie.findOneAndUpdate(foundMovie._id, {
+        $push: { genres: foundGenre._id }, //genres as ref in Movie Model
       });
-      await Genre.findOneAndUpdate(genreId, {
-        $push: { movies: req.movie._id }, // movies as in Genre model
+      await Genre.findOneAndUpdate(foundGenre._id, {
+        $push: { movies: foundMovie._id }, // movies as in Genre model
       });
 
       return res.status(204).end();

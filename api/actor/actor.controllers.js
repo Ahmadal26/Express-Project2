@@ -42,7 +42,6 @@ exports.getActorById = async (req, res, next) => {
     next(error);
   }
 };
-
 // addActorToMovie -
 exports.addActorToMovie = async (req, res, next) => {
   try {

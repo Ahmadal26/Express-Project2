@@ -17,7 +17,7 @@ const Movie = require("../../models/Movie");
 // since a user -  no need to be staff
 exports.getAllMovie = async (req, res, next) => {
   try {
-    const movies = await Movie.find();
+    const movies = await Movie.find().populate("genres", "type -_id");
     res.status(200).json(movies);
   } catch (error) {
     res.status(401).json({ message: " No Movies Found " });
