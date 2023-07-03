@@ -9,12 +9,13 @@ const {
 } = require("./actor.controllers");
 const router = express.Router();
 const passport = require("passport");
+const Actor = require("../../models/Actor");
 
 // Everything with the word actor is a placeholder that you'll change in accordance with your project
 
 router.param("actorId", async (req, res, next, actorId) => {
   try {
-    const foundActor = await fetchActor(actorId);
+    const foundActor = await Actor.findById(actorId);
     if (!foundActor) return next({ status: 404, message: "Actor not found" });
     req.actor = foundActor;
     next();

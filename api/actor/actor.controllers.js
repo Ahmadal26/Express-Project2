@@ -69,11 +69,11 @@ exports.addActorToMovie = async (req, res, next) => {
 
     // step 3: if both movie and actor found
     if (foundActor && foundMovie) {
-      await Movie.findOneAndUpdate(req.movie._id, {
-        $push: { actors: Actor._id }, //Actor as ref in Movie Model
+      await Movie.findOneAndUpdate(foundMovie._id, {
+        $push: { actors: foundActor._id }, //Actor as ref in Movie Model
       });
-      await Actor.findOneAndUpdate(actorId, {
-        $push: { movies: req.movie._id }, // movies as in Actor model
+      await Actor.findOneAndUpdate(foundActor._id, {
+        $push: { movies: foundMovie._id }, // movies as in Actor model
       });
 
       res.status(204).end();

@@ -15,7 +15,7 @@ exports.fetchReview = async (tempId, next) => {
 // any user can fetch all reviews
 exports.getReviews = async (req, res, next) => {
   const reviews = await Review.find();
-  return res.status(200).res.json(reviews);
+  return res.status(200).json(reviews);
 };
 
 // Fetch one review by its Id
@@ -56,7 +56,7 @@ exports.createMovieReview = async (req, res, next) => {
     const review = {
       name: req.user.username,
       rating: Number(rating),
-      comment,
+      text: req.body.text,
       user: req.user._id,
     };
 
